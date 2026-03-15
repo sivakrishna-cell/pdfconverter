@@ -28,4 +28,92 @@ background:white;
 max-width:400px;
 width:90%;
 margin:auto;
-margin-top:80px
+margin-top:80px;
+padding:30px;
+border-radius:12px;
+box-shadow:0 0 25px rgba(0,0,0,0.2);
+}
+
+h2{
+margin-top:0;
+}
+
+input{
+width:100%;
+padding:10px;
+}
+
+button{
+width:100%;
+margin-top:15px;
+padding:12px;
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#43a047;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 class="logo">QuickPDF</h1>
+
+<div class="container">
+
+<h2>Image to PDF Converter</h2>
+
+<input type="file" id="imageInput">
+
+<button onclick="convertPDF()">Convert to PDF</button>
+
+</div>
+
+<script>
+
+async function convertPDF(){
+
+const { jsPDF } = window.jspdf;
+
+let file = document.getElementById("imageInput").files[0];
+
+if(!file){
+alert("Please upload an image");
+return;
+}
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+
+let img = new Image();
+img.src = e.target.result;
+
+img.onload = function(){
+
+let pdf = new jsPDF();
+
+pdf.addImage(img,'JPEG',10,10,180,160);
+
+pdf.save("converted.pdf");
+
+}
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>

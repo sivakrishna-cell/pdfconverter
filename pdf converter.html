@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image to PDF Converter</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body style="text-align:center; font-family:Arial">
+
+<h1>Image to PDF Converter</h1>
+
+<input type="file" id="imageInput">
+
+<br><br>
+
+<button onclick="convertPDF()">Convert to PDF</button>
+
+<script>
+
+async function convertPDF(){
+
+const { jsPDF } = window.jspdf;
+
+let file = document.getElementById("imageInput").files[0];
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+
+let img = new Image();
+img.src = e.target.result;
+
+img.onload = function(){
+
+let pdf = new jsPDF();
+
+pdf.addImage(img,'JPEG',10,10,180,160);
+
+pdf.save("converted.pdf");
+
+}
+
+}
+
+reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>

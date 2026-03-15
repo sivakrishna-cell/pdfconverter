@@ -1,54 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Image to PDF Converter</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QuickPDF - Image to PDF</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-</head>
+<style>
 
-<body style="text-align:center; font-family:Arial">
-
-<h1>Image to PDF Converter</h1>
-
-<input type="file" id="imageInput">
-
-<br><br>
-
-<button onclick="convertPDF()">Convert to PDF</button>
-
-<script>
-
-async function convertPDF(){
-
-const { jsPDF } = window.jspdf;
-
-let file = document.getElementById("imageInput").files[0];
-
-let reader = new FileReader();
-
-reader.onload = function(e){
-
-let img = new Image();
-img.src = e.target.result;
-
-img.onload = function(){
-
-let pdf = new jsPDF();
-
-pdf.addImage(img,'JPEG',10,10,180,160);
-
-pdf.save("converted.pdf");
-
+body{
+margin:0;
+font-family:Arial;
+background: linear-gradient(135deg,#667eea,#764ba2);
+text-align:center;
 }
 
+.logo{
+color:white;
+font-size:36px;
+margin-top:40px;
 }
 
-reader.readAsDataURL(file);
-
-}
-
-</script>
-
-</body>
-</html>
+.container{
+background:white;
+max-width:400px;
+width:90%;
+margin:auto;
+margin-top:80px
